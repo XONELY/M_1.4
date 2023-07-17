@@ -5,10 +5,16 @@ import java.util.concurrent.*;
 public class Main {
     public static void main(String[] args) {
         Foo foo = new Foo();
-        ExecutorService es = Executors.newFixedThreadPool(3);
+        System.out.println(Runtime.getRuntime().availableProcessors());
+       /* ExecutorService es = Executors.newFixedThreadPool(3);
         es.execute(() -> foo.first(new Thread()));
         es.execute(() -> foo.third(new Thread()));
-        es.execute(() -> foo.second(new Thread()));
+        es.execute(() -> foo.second(new Thread()));*/
+
+        CompletableFuture.runAsync(() -> foo.first(new Thread()));
+        CompletableFuture.runAsync(() -> foo.third(new Thread()));
+        CompletableFuture.runAsync(() -> foo.second(new Thread()));
+
     }
 }
 
